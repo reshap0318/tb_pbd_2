@@ -7,7 +7,7 @@
 </div>
 
 <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Waktu Mulai</label>
+    <label class="col-sm-2 col-form-label">Waktu Pergi</label>
     <div class="col-sm-10">
         <input type="time" class="form-control" value="<?php if(isset($data['waktu_mulai'])){echo $data['waktu_mulai'];} ?>"  id="waktu_mulai" name="waktu_mulai" required>
         <span class="messages popover-valid"></span>
@@ -15,7 +15,7 @@
 </div>
 
 <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Waktu Akhir</label>
+    <label class="col-sm-2 col-form-label">Waktu Sampai</label>
     <div class="col-sm-10">
         <input type="time" class="form-control" value="<?php if(isset($data['waktu_sampai'])){echo $data['waktu_sampai'];} ?>"  id="waktu_sampai" name="waktu_sampai" required>
         <span class="messages popover-valid"></span>

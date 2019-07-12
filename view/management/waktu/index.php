@@ -11,6 +11,29 @@ $waktu = new waktu($conn);
       header("location:/tb_pbd_sp/view/");
     }
   }
+
+  function hari($day)
+  {
+      $hari = 'Tidak Terdifinisikan';
+      if($day == 1){
+        $hari = 'Senin';
+      }elseif($day == 2){
+        $hari = 'Selasa';
+      }elseif($day == 3){
+        $hari = 'Rabu';
+      }elseif($day == 4){
+        $hari = 'Kamis';
+      }elseif($day == 5){
+        $hari = 'Jumat';
+      }elseif($day == 6){
+        $hari = 'Sabtu';
+      }elseif($day == 7){
+        $hari = 'Minggu';
+      }
+
+      echo $hari;
+  }
+
 ?>
 <?php startblock('title') ?> Waktu Management <?php endblock() ?>
 
@@ -31,8 +54,8 @@ Waktu Management
                   <tr>
                       <th style="width:20px" class="text-center">NO</th>
                       <th>Kode Waktu</th>
-                      <th>Waktu Mulai</th>
-                      <th>Waktu Akhir</th>
+                      <th>Waktu Pergi</th>
+                      <th>Waktu Sampai</th>
                       <th>Hari</th>
                       <th style="width:100px">Action</th>
                   </tr>
@@ -46,7 +69,7 @@ Waktu Management
                       <td><?php echo $data['kode_waktu'];?></td>
                       <td><?php echo $data['waktu_mulai']?></td>
                       <td><?php echo $data['waktu_sampai']?></td>
-                      <td><?php echo $data['hari']?></td>
+                      <td><?php echo hari($data['hari'])?></td>
                       <td style="width:100px">
                         <?php if($hak_akses==1 || $hak_akses==2){ ?>
                         <a href="/tb_pbd_sp/view/management/waktu/edit.php?kode_waktu=<?php echo $data['kode_waktu']; ?>" class="btn btn-primary btn-mini waves-effect waves-light">Edit</a>

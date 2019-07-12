@@ -11,6 +11,19 @@ $kendaraan = new kendaraan($conn);
       header("location:/tb_pbd_sp/view/");
     }
   }
+
+  function kondisi($status)
+  {
+      if($status == 1){
+        echo "Baik";
+      }elseif($status == 2){
+        echo "Rusak Sedikit";
+      }elseif($status == 3){
+        echo "Rusak Berat";
+      }else{
+        echo "Error Data salah masuk";
+      }
+  }
 ?>
 <?php startblock('title') ?> Kendaraan Management <?php endblock() ?>
 
@@ -31,11 +44,8 @@ Kendaraan Management
                   <tr>
                       <th>Kode</th>
                       <th>Plat No</th>
-                      <th>Full (L)</th>
-                      <th>1L/Meter</th>
                       <th>Kondisi</th>
                       <th>Merek</th>
-                      <th>Bensin</th>
                       <th>Sopir</th>
                       <th style="width:100px">Action</th>
                   </tr>
@@ -47,11 +57,8 @@ Kendaraan Management
                   <tr>
                       <td><?php echo $data['kode_kendaraan'];?></td>
                       <td><?php echo $data['plat_no'];?></td>
-                      <td><?php echo $data['minyak_full'];?></td>
-                      <td><?php echo $data['m_1l'];?></td>
-                      <td><?php echo $data['kondisi'];?></td>
+                      <td><?php echo kondisi($data['kondisi']);?></td>
                       <td><?php echo $data['kode_merek'];?></td>
-                      <td><?php echo $data['kode_bensin'];?></td>
                       <td><?php echo $data['nik'];?></td>
                       <td style="width:100px">
                         <?php if($hak_akses==1 || $hak_akses==2){ ?>

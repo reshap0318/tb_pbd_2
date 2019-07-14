@@ -36,7 +36,7 @@
           }else{
             array_push($_SESSION['pesan'],['berhasil','Berhasil Menambahkan Kursi']);
           }
-          header("location:/tb_pbd_sp/view/kendaraan-kursi?kode_kendaraan=$kode_kendaraan");
+          header("location:/tb_pbd_sp/view/management/kendaraan-kursi?kode_kendaraan=$kode_kendaraan");
         }else{
           if(mysqli_query($this->koneksi,$sql)){
             echo "<br>Berhasil Menambahkan Data Kursi ".$nama;
@@ -71,7 +71,7 @@
         }else{
           array_push($_SESSION['pesan'],['berhasil','Berhasil Merubah Kursi']);
         }
-        header("location:/tb_pbd_sp/view/kendaraan-kursi?kode_kendaraan=$kode_kendaraan");
+        header("location:/tb_pbd_sp/view/management/kendaraan-kursi?kode_kendaraan=$kode_kendaraan");
     }
 
     function delete($kode_kursi = '')
@@ -89,7 +89,7 @@
         }else{
             array_push($_SESSION['pesan'],['eror','kode_kursi tidak ditemukan']);
         }
-        header("location:/tb_pbd_sp/view/kendaraan-kursi?kode_kendaraan=$kode_kendaraan");
+        header("location:/tb_pbd_sp/view/management/kendaraan-kursi?kode_kendaraan=$kode_kendaraan");
     }
 
     function empty()

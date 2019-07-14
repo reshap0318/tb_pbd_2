@@ -8,10 +8,15 @@
       $this->koneksi = $conn;
   	}
 
-    function data($kode_kendaraan=''){
+    function data($kode_kendaraan='', $relation=false){
       $sql = "select * from kendaraan";
+
+      if($relation){
+        $sql = "select kode_kendaraan, plat_no, no_mesin, no_rangka, minyak_full, m_1l, kondisi, merek_kendaraan.nama as merek, bensin.nama as bensin, users.nama as sopir from kendaraan join merek_kendaraan on kendaraan.kode_merek = merek_kendaraan.kode_merek join bensin on kendaraan.kode_bensin = bensin.kode_bensin join users on kendaraan.nik = users.nik";
+      }
+
       if($kode_kendaraan!=''){
-        $sql = "select * from kendaraan where kode_kendaraan = '$kode_kendaraan'";
+        $sql .= " where kode_kendaraan = '$kode_kendaraan'";
       }
       $data = mysqli_query($this->koneksi,$sql);
       return $data;
@@ -118,6 +123,16 @@
       }else{
         echo "Gagal Membersihkan data<br>".mysqli_error($this->koneksi)."<br>";
       }
+    }
+
+    function data_d_lokasi($kode_satker, $kode_kendaraan='')
+    {
+        $sql = "SELECT kendaraan_satker.kode_kendaraan, kendaraan.plat_no FROM `kendaraan_satker` join kendaraan on kendaraan_satker.kode_kendaraan = kendaraan.kode_kendaraan where kendaraan_satker.kode_satker = '$kode_satker' and kendaraan_satker.keluar is null";
+        if($kode_kendaraan){
+          $sql = "SELECT distinct kendaraan_satker.kode_kendaraan, kendaraan.plat_no FROM `kendaraan_satker` join kendaraan on kendaraan_satker.kode_kendaraan = kendaraan.kode_kendaraan where kendaraan_satker.kode_satker = '$kode_satker' and kendaraan_satker.keluar is null or kendaraan_satker.kode_kendaraan = '$kode_kendaraan'";
+        }
+        $data = mysqli_query($this->koneksi,$sql);
+        return $data;
     }
   }
 

@@ -1,8 +1,8 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'].'/tb_pbd_sp/blank.php';
 
-include $_SERVER['DOCUMENT_ROOT'].'/tb_pbd_sp/model/waktu.php';
-$waktu = new waktu($conn);
+include $_SERVER['DOCUMENT_ROOT'].'/tb_pbd_sp/model/kendaraan_satker.php';
+$parkir = new kendaraan_satker($conn);
 ?>
 <?php
 
@@ -14,25 +14,25 @@ $waktu = new waktu($conn);
   }
 
 ?>
-<?php startblock('title') ?> Edit Bensin <?php endblock() ?>
+<?php startblock('title') ?> Lokasi Kendaraan <?php endblock() ?>
 <?php startblock('breadcrumb-link') ?>
-<li class="breadcrumb-item"><a href="/tb_pbd_sp/view/management/waktu">Bensin</a>
+<li class="breadcrumb-item"><a href="/tb_pbd_sp/view/lokasi-kendaraan">Lokasi Kendaraan</a>
 <li class="breadcrumb-item"><a href="#!">Edit</a>
 <?php endblock() ?>
 <?php startblock('breadcrumb-title') ?>
-Edit Bensin
+Edit Lokasi Kendaraan
 <?php endblock() ?>
 
 <?php startblock('content') ?>
 <div class="card">
     <div class="card-block">
-        <form id="second" action="/tb_pbd_sp/controller/waktuController.php?aksi=update" method="post" novalidate>
+        <form id="second" action="/tb_pbd_sp/controller/kendaraan_satkerController.php?aksi=update" method="post" novalidate>
             <?php
-              $kode_waktu = $_GET['kode_waktu'];
-              foreach ($waktu->data($kode_waktu) as $data) {
+              $kode_parkir = $_GET['kode_parkir'];
+              foreach ($parkir->data($kode_parkir) as $data) {
             ?>
-            <input type="hidden" value="<?php echo $kode_waktu;?>"  id="last_kode_waktu" name="last_kode_waktu">
-            <?php include $_SERVER['DOCUMENT_ROOT'].'/tb_pbd_sp/view/management/waktu/_field.php'; ?>
+            <input type="hidden" name="last_kode_parkir" value="<?php echo $kode_parkir; ?>">
+            <?php include $_SERVER['DOCUMENT_ROOT'].'/tb_pbd_sp/view/lokasi-kendaraan/_field.php'; ?>
             <?php } ?>
             <div class="row">
                 <label class="col-sm-2"></label>

@@ -6,23 +6,10 @@ $kendaraan = new kendaraan($conn);
 
 <?php
   if(isset($hak_akses)){
-    if($hak_akses==3){
+    if($hak_akses!=1){
       array_push($_SESSION['pesan'],['eror','Anda Tidak Memiliki Akses Kesini']);
       header("location:/tb_pbd_sp/view/");
     }
-  }
-
-  function kondisi($status)
-  {
-      if($status == 1){
-        echo "Baik";
-      }elseif($status == 2){
-        echo "Rusak Sedikit";
-      }elseif($status == 3){
-        echo "Rusak Berat";
-      }else{
-        echo "Error Data salah masuk";
-      }
   }
 ?>
 <?php startblock('title') ?> Kendaraan Management <?php endblock() ?>
@@ -52,20 +39,20 @@ Kendaraan Management
               </thead>
               <tbody>
                 <?php $no=0;
-                  foreach ($kendaraan->data() as $data) {
+                  foreach ($kendaraan->data('',true) as $data) {
                 ?>
                   <tr>
                       <td><?php echo $data['kode_kendaraan'];?></td>
                       <td><?php echo $data['plat_no'];?></td>
-                      <td><?php echo kondisi($data['kondisi']);?></td>
-                      <td><?php echo $data['kode_merek'];?></td>
-                      <td><?php echo $data['nik'];?></td>
+                      <td><?php echo $helper->kondisi($data['kondisi']);?></td>
+                      <td><?php echo $data['merek'];?></td>
+                      <td><?php echo $data['sopir'];?></td>
                       <td style="width:100px">
                         <?php if($hak_akses==1 || $hak_akses==2){ ?>
                         <a href="/tb_pbd_sp/view/management/kendaraan/edit.php?kode_kendaraan=<?php echo $data['kode_kendaraan']; ?>" class="btn btn-primary btn-mini waves-effect waves-light">Edit</a>
                         <?php } ?>
                         <?php if($hak_akses==1 || $hak_akses==2){ ?>
-                        <a href="/tb_pbd_sp/view/management/kendaraan/edit.php?kode_kendaraan=<?php echo $data['kode_kendaraan']; ?>" class="btn btn-primary btn-mini waves-effect waves-light">Kursi</a>
+                        <a href="/tb_pbd_sp/view/management/kendaraan-kursi?kode_kendaraan=<?php echo $data['kode_kendaraan']; ?>" class="btn btn-primary btn-mini waves-effect waves-light">Kursi</a>
                         <?php } ?>
                         <?php if($hak_akses==1 || $hak_akses==2){ ?>
                         <a href="#" class="btn btn-danger btn-mini waves-effect waves-light" onclick="hapus('<?php echo $data['kode_kendaraan']; ?>')">Delete</a>
@@ -78,9 +65,9 @@ Kendaraan Management
           <form class="" id="formdelete" style="display:none" action="/tb_pbd_sp/controller/kendaraanController.php?aksi=delete" method="post">
             <input type="text" name="kode_kendaraan" value="" id="delete_id">
           </form>
-                </div>
-            </div>
-          </div>
+      </div>
+  </div>
+</div>
 <?php endblock() ?>
 
 <?php startblock('table') ?>

@@ -9,21 +9,21 @@
   }
 
 ?>
-<?php startblock('title') ?> Create Lokasi <?php endblock() ?>
+<?php startblock('title') ?> Create Lokasi Kendaraan<?php endblock() ?>
 <?php startblock('breadcrumb-link') ?>
-<li class="breadcrumb-item"><a href="/tb_pbd_sp/view/management/waktu">Waktu</a>
+<li class="breadcrumb-item"><a href="/tb_pbd_sp/view/lokasi-kendaraan">Lokasi Kendaraan</a>
 <li class="breadcrumb-item"><a href="#!">Create</a>
 <?php endblock() ?>
 <?php startblock('breadcrumb-title') ?>
-Create Lokasi
+Create Lokasi Kendaraan
 <?php endblock() ?>
 
 <?php startblock('content') ?>
 <div class="card">
     <div class="card-block">
-        <form id="second" action="/tb_pbd_sp/controller/waktuController.php?aksi=create" method="post" novalidate>
+        <form id="second" action="/tb_pbd_sp/controller/kendaraan_satkerController.php?aksi=create" method="post" novalidate>
 
-            <?php include $_SERVER['DOCUMENT_ROOT'].'/tb_pbd_sp/view/management/waktu/_field.php'; ?>
+            <?php include $_SERVER['DOCUMENT_ROOT'].'/tb_pbd_sp/view/lokasi-kendaraan/_field.php'; ?>
             <div class="row">
                 <div class="col-sm-12 text-center">
                     <button type="submit" class="btn btn-primary m-b-0">Submit</button>

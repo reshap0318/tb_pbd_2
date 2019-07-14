@@ -1,7 +1,7 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'].'/tb_pbd_sp/blank.php';
-include $_SERVER['DOCUMENT_ROOT'].'/tb_pbd_sp/model/waktu.php';
-$waktu = new waktu($conn);
+include $_SERVER['DOCUMENT_ROOT'].'/tb_pbd_sp/model/kendaraan_satker.php';
+$parkir = new kendaraan_satker($conn);
 ?>
 
 <?php
@@ -12,25 +12,25 @@ $waktu = new waktu($conn);
     }
   }
 ?>
-<?php startblock('title') ?> Lokasi Mobil Management <?php endblock() ?>
+<?php startblock('title') ?> Lokasi Kendaraan <?php endblock() ?>
 
 <?php startblock('breadcrumb-link') ?>
-<li class="breadcrumb-item"><a href="#!">Lokasi Mobil Management</a>
+<li class="breadcrumb-item"><a href="#!">Lokasi Kendaraan</a>
 <?php endblock() ?>
 
 <?php startblock('breadcrumb-title') ?>
-Lokasi Mobil Management
+Lokasi Kendaraan
 <?php endblock() ?>
 
 <?php startblock('content') ?>
 <div class="card">
   <div class="card-block">
       <div class="dt-responsive table-responsive">
-          <table id="tblwaktu" class="table table-striped table-bordered nowrap" style="width:100%">
+          <table id="tblparkir" class="table table-striped table-bordered nowrap" style="width:100%">
               <thead>
                   <tr>
                       <th style="width:20px" class="text-center">NO</th>
-                      <th>Kode Kendaraan</th>
+                      <th>Plat No</th>
                       <th>Satker</th>
                       <th>Datang</th>
                       <th>Keluar</th>
@@ -39,28 +39,35 @@ Lokasi Mobil Management
               </thead>
               <tbody>
                 <?php $no=0;
-                  foreach ($waktu->data() as $data) {
+                  foreach ($parkir->data('',$kode_satker,true) as $data) {
                 ?>
                   <tr>
                       <td style="width:20px" class="text-center"><?php echo ++$no;?></td>
-                      <td>SK1</td>
-                      <td>Padang</td>
-                      <td>20 Feb 2019 22.00 PM</td>
-                      <td>20 Feb 2019 23.00 PM</td>
+                      <td><?php echo $data['plat_no'];?></td>
+                      <td><?php echo $data['satker'];?></td>
+                      <td><?php echo $data['datang'];?></td>
+                      <td><?php echo $data['keluar'];?></td>
                       <td style="width:100px">
                         <?php if($hak_akses==1 || $hak_akses==2){ ?>
-                        <a href="/tb_pbd_sp/view/management/waktu/edit.php?kode_waktu=<?php echo $data['kode_waktu']; ?>" class="btn btn-primary btn-mini waves-effect waves-light">Edit</a>
+                        <a href="/tb_pbd_sp/view/lokasi-kendaraan/edit.php?kode_parkir=<?php echo $data['id']; ?>" class="btn btn-primary btn-mini waves-effect waves-light">Edit</a>
                         <?php } ?>
+                        <?php if($hak_akses==1 || $hak_akses==2){
+                          if(!$data['keluar']){?>
+                        <a href="/tb_pbd_sp/controller/kendaraan_satkerController.php?aksi=keluar&kode_parkir=<?php echo $data['id']; ?>" class="btn btn-warning btn-mini waves-effect waves-light">Keluar</a>
+                        <?php
+                            }
+                          }
+                        ?>
                         <?php if($hak_akses==1 || $hak_akses==2){ ?>
-                        <a href="#" class="btn btn-danger btn-mini waves-effect waves-light" onclick="hapus('<?php echo $data['kode_waktu']; ?>')">Delete</a>
+                        <a href="#" class="btn btn-danger btn-mini waves-effect waves-light" onclick="hapus('<?php echo $data['id']; ?>')">Delete</a>
                         <?php } ?>
                       </td>
                   </tr>
                 <?php } ?>
               </tbody>
           </table>
-          <form class="" id="formdelete" style="display:none" action="/tb_pbd_sp/controller/waktuController.php?aksi=delete" method="post">
-            <input type="text" name="kode_waktu" value="" id="delete_id">
+          <form class="" id="formdelete" style="display:none" action="/tb_pbd_sp/controller/kendaraan_satkerController.php?aksi=delete" method="post">
+            <input type="text" name="kode_parkir" value="" id="delete_id">
           </form>
                 </div>
             </div>
@@ -71,17 +78,17 @@ Lokasi Mobil Management
   <!-- info lebih lanjut bisa di cek di : -->
   <!--editor/assets/pages/data-table/js/data-table-custom.js"-->
   <script type="text/javascript">
-      $('#tblwaktu').DataTable(
+      $('#tblparkir').DataTable(
         {
         "info":     false,
         dom: 'Bfrtip',
         buttons: [
         {
-            text: 'Tambah Lokasi Mobil',
+            text: 'Tambah Lokasi Kendaraan',
             className: 'btn-success',
             action: function(e, dt, node, config)
             {
-              window.location.assign("/tb_pbd_sp/view/management/waktu/create.php");
+              window.location.assign("/tb_pbd_sp/view/lokasi-kendaraan/create.php");
             }
         },
         {

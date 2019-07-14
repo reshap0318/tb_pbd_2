@@ -8,13 +8,18 @@
       $this->koneksi = $conn;
   	}
 
-    function data($nik=''){
+    function data($nik='', $relation = false){
 
       $sql = "select * from users";
-      if($nik!=''){
-        $sql = "select * from users where nik = '$nik'";
+
+      if($relation){
+        $sql = "select nik, nama, username, kota_lahir, tanggal_lahir, alamat, no_telp, hak_akses, satker.nama from users join satker on users.kode_satker = satker.kode_satker";
       }
 
+      if($nik!=''){
+        $sql .= " where nik = '$nik'";
+      }
+      
       $data = mysqli_query($this->koneksi,$sql);
 
       return $data;

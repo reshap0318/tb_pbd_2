@@ -1,8 +1,8 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'].'/tb_pbd_sp/blank.php';
 
-include $_SERVER['DOCUMENT_ROOT'].'/tb_pbd_sp/model/merek.php';
-$merek = new merek($conn);
+include $_SERVER['DOCUMENT_ROOT'].'/tb_pbd_sp/model/kendaraan_kursi.php';
+$kursi = new kendaraan_kursi($conn);
 ?>
 <?php
 
@@ -14,25 +14,26 @@ $merek = new merek($conn);
   }
 
 ?>
-<?php startblock('title') ?> Edit Bensin <?php endblock() ?>
+<?php startblock('title') ?> Edit Kursi <?php endblock() ?>
 <?php startblock('breadcrumb-link') ?>
-<li class="breadcrumb-item"><a href="/tb_pbd_sp/view/management/merek-kendaraan">Bensin</a>
+<li class="breadcrumb-item"><a href="/tb_pbd_sp/view/management/kendaraan-kursi">Kursi</a>
 <li class="breadcrumb-item"><a href="#!">Edit</a>
 <?php endblock() ?>
 <?php startblock('breadcrumb-title') ?>
-Edit Bensin
+Edit Kursi
 <?php endblock() ?>
 
 <?php startblock('content') ?>
 <div class="card">
     <div class="card-block">
-        <form id="second" action="/tb_pbd_sp/controller/merekController.php?aksi=update" method="post" novalidate>
+        <form id="second" action="/tb_pbd_sp/controller/kendaraan_kursiController.php?aksi=update" method="post" novalidate>
             <?php
-              $kode_merek = $_GET['kode_merek'];
-              foreach ($merek->data($kode_merek) as $data) {
+              $kode_kursi = $_GET['kode_kursi'];
+              foreach ($kursi->data($kode_kursi) as $data) {
             ?>
-            <input type="hidden" value="<?php echo $kode_merek;?>"  id="last_kode_merek" name="last_kode_merek">
-            <?php include $_SERVER['DOCUMENT_ROOT'].'/tb_pbd_sp/view/management/merek-kendaraan/_field.php'; ?>
+            <input type="hidden" value="<?php echo $kode_kursi;?>"  id="last_kode_kursi" name="last_kode_kursi">
+            <input type="hidden" name="kode_kendaraan" value="<?php echo $data['kode_kendaraan'];?>" readonly>
+            <?php include $_SERVER['DOCUMENT_ROOT'].'/tb_pbd_sp/view/management/kendaraan-kursi/_field.php'; ?>
             <?php } ?>
             <div class="row">
                 <label class="col-sm-2"></label>

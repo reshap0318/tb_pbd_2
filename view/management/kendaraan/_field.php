@@ -49,7 +49,7 @@
 <div class="form-group row">
     <label class="col-sm-2 col-form-label">Kondisi</label>
     <div class="col-sm-10">
-        <select class="form-control" name="kondisi" required>
+        <select class="form-control js-example-basic-single" name="kondisi" required>
           <option value="1" <?php if(isset($data['kondisi'])){if($data['kondisi']==1){echo "selected";}} ?>>Baik</option>
           <option value="2" <?php if(isset($data['kondisi'])){if($data['kondisi']==2){echo "selected";}} ?>>Rusak Sedikit</option>
           <option value="3" <?php if(isset($data['kondisi'])){if($data['kondisi']==3){echo "selected";}} ?>>Rusak Berat</option>
@@ -61,13 +61,17 @@
 <div class="form-group row">
     <label class="col-sm-2 col-form-label">Merek</label>
     <div class="col-sm-10">
-      <select class="form-control" name="kode_merek" required>
+      <select class="form-control js-example-basic-single" name="kode_merek" required>
         <?php
           include $_SERVER['DOCUMENT_ROOT'].'/tb_pbd_sp/model/merek.php';
           $merek = new merek($conn);
 
           foreach ($merek->data() as $sat) {
+            if($sat['kode_merek'] == $data['kode_merek']){
+              echo '<option value="'.$sat['kode_merek'].'" selected>'.$sat['nama'].'</option>';
+            }else{
               echo '<option value="'.$sat['kode_merek'].'">'.$sat['nama'].'</option>';
+            }
           }
         ?>
       </select>
@@ -78,13 +82,17 @@
 <div class="form-group row">
     <label class="col-sm-2 col-form-label">Bensin</label>
     <div class="col-sm-10">
-      <select class="form-control" name="kode_bensin" required>
+      <select class="form-control js-example-basic-single" name="kode_bensin" required>
         <?php
           include $_SERVER['DOCUMENT_ROOT'].'/tb_pbd_sp/model/bensin.php';
           $bensin = new bensin($conn);
 
           foreach ($bensin->data() as $sat) {
-              echo '<option value="'.$sat['kode_bensin'].'">'.$sat['nama'].'</option>';
+              if($sat['kode_bensin'] == $data['kode_bensin']){
+                echo '<option value="'.$sat['kode_bensin'].'" selected>'.$sat['nama'].'</option>';
+              }else{
+                echo '<option value="'.$sat['kode_bensin'].'">'.$sat['nama'].'</option>';
+              }
           }
         ?>
       </select>
@@ -95,13 +103,17 @@
 <div class="form-group row">
     <label class="col-sm-2 col-form-label">Sopir</label>
     <div class="col-sm-10">
-      <select class="form-control" name="nik" required>
+      <select class="form-control js-example-basic-single" name="nik" required>
         <?php
           include $_SERVER['DOCUMENT_ROOT'].'/tb_pbd_sp/model/user.php';
           $user = new user($conn);
 
           foreach ($user->data() as $sat) {
-              echo '<option value="'.$sat['nik'].'">'.$sat['nama'].'</option>';
+              if($sat['nik'] == $data['nik']){
+                echo '<option value="'.$sat['nik'].'" selected>'.$sat['nama'].'</option>';
+              }else{
+                echo '<option value="'.$sat['nik'].'">'.$sat['nama'].'</option>';
+              }
           }
         ?>
       </select>

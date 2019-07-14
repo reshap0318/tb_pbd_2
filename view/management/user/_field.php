@@ -66,13 +66,17 @@
 <div class="form-group row">
     <label class="col-sm-2 col-form-label">Satuan Kerja</label>
     <div class="col-sm-10">
-      <select class="form-control" name="kode_satker" required>
+      <select class="form-control js-example-basic-single" name="kode_satker" required>
         <?php
           include $_SERVER['DOCUMENT_ROOT'].'/tb_pbd_sp/model/satker.php';
           $satker = new satker($conn);
 
           foreach ($satker->data() as $sat) {
+            if($sat['kode_satker'] == $data['kode_satker']){
+              echo '<option value="'.$sat['kode_satker'].'" selected>'.$sat['nama'].'</option>';
+            }else{
               echo '<option value="'.$sat['kode_satker'].'">'.$sat['nama'].'</option>';
+            }
           }
         ?>
       </select>
@@ -86,6 +90,10 @@
       <select class="form-control" name="hak_akses" required>
         <?php if($hak_akses==1){ ?>
         <option value="1" <?php if(isset($data['hak_akses'])){if($data['hak_akses']==1){echo "selected";}} ?>>Admin</option>
+        <?php } ?>
+        <?php if($hak_akses==1 || $hak_akses==2){ ?>
+        <option value="2" <?php if(isset($data['hak_akses'])){if($data['hak_akses']==2){echo "selected";}} ?>>Operator</option>
+        <option value="3" <?php if(isset($data['hak_akses'])){if($data['hak_akses']==3){echo "selected";}} ?>>Sopir</option>
         <?php } ?>
       </select>
       <span class="messages popover-valid"></span>

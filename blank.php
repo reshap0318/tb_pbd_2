@@ -1,14 +1,21 @@
 <?php require_once 'ti.php' ?>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/tb_pbd_sp/controller/koneksi.php'; ?>
 <?php
-
+  include $_SERVER['DOCUMENT_ROOT'].'/tb_pbd_sp/controller/helper.php';
+  $helper = new helper;
   if($_SESSION['status']!=1){
     array_push($_SESSION['pesan'],['eror','Anda Belum Login, Silakan Login Terlebih Dahulu']);
     header("location:/tb_pbd_sp/view/auth/login.php");
   }
   $username = $_SESSION['username'];
+  $nik = $_SESSION['nik'];
   $nama = $_SESSION['nama'];
   $hak_akses = $_SESSION['hak_akses'];
+  $kota_lahir = $_SESSION['kota_lahir'];
+  $tanggal_lahir = $_SESSION['tanggal_lahir'];
+  $kode_satker = $_SESSION['kode_satker'];
+  $alamat = $_SESSION['alamat'];
+  $no_telp = $_SESSION['no_telp'];
   $kode = $_SESSION['kode'];
   $akun = "";
 
@@ -180,7 +187,7 @@
             <div class="pcoded-wrapper">
                 <nav class="pcoded-navbar">
                     <div class="pcoded-inner-navbar main-menu">
-                      <?php if($hak_akses == 1 || $hak_akses == 2){ ?>
+                      <?php if($hak_akses == 1){ ?>
                         <div class="pcoded-navigatio-lavel">Management</div>
                         <ul class="pcoded-item pcoded-left-item">
                             <li class="">
@@ -230,17 +237,19 @@
                         <div class="pcoded-navigatio-lavel">General</div>
                         <ul class="pcoded-item pcoded-left-item">
                           <li class="">
-                              <a href="/tb_pbd_sp/view/management/Pemesanan">
+                              <a href="/tb_pbd_sp/view/jadwal-Keberangkatan">
                                   <span class="pcoded-micon"><i class="icofont icofont-users"></i></span>
-                                  <span class="pcoded-mtext">Pemesanan</span>
+                                  <span class="pcoded-mtext">Jadwal Keberangkatan</span>
                               </a>
                           </li>
+                        <?php if($hak_akses == 1 || $hak_akses == 2){ ?>
                           <li class="">
-                              <a href="/tb_pbd_sp/view/management/lokasi-kendaraan">
+                              <a href="/tb_pbd_sp/view/lokasi-kendaraan">
                                   <span class="pcoded-micon"><i class="icofont icofont-users"></i></span>
                                   <span class="pcoded-mtext">Lokasi Kendaraan</span>
                               </a>
                           </li>
+                        <?php } ?>
                       </ul>
                     </div>
                 </nav>

@@ -9,7 +9,7 @@ $bensin = new bensin($conn);
 <?php
 
   if(isset($hak_akses)){
-    if($hak_akses==3){
+    if($hak_akses!=1){
       array_push($_SESSION['pesan'],['eror','Anda Tidak Memiliki Akses Kesini']);
       header("location:/tb_pbd_sp/view/");
     }
@@ -48,7 +48,7 @@ Bensin Management
                       <td style="width:20px" class="text-center"><?php echo ++$no;?></td>
                       <td><?php echo $data['kode_bensin'];?></td>
                       <td><?php echo $data['nama']?></td>
-                      <td><?php echo $data['harga']?></td>
+                      <td><?php echo $helper->rp($data['harga'])?></td>
                       <td style="width:100px">
                         <?php if($hak_akses==1 || $hak_akses==2){ ?>
                         <a href="/tb_pbd_sp/view/management/bensin/edit.php?kode_bensin=<?php echo $data['kode_bensin']; ?>" class="btn btn-primary btn-mini waves-effect waves-light">Edit</a>

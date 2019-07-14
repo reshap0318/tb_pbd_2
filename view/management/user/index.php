@@ -9,7 +9,7 @@ $user = new user($conn);
 <?php
 
   if(isset($hak_akses)){
-    if($hak_akses==3){
+    if($hak_akses!=1){
       array_push($_SESSION['pesan'],['eror','Anda Tidak Memiliki Akses Kesini']);
       header("location:/tb_pbd_sp/view/");
     }
@@ -36,6 +36,7 @@ Users Management
                       <th style="width:20px" class="text-center">NO</th>
                       <th>Username</th>
                       <th>Nama</th>
+                      <th>No Telp</th>
                       <th>Status</th>
                       <th style="width:100px">Action</th>
                   </tr>
@@ -48,7 +49,8 @@ Users Management
                       <td style="width:20px" class="text-center"><?php echo ++$no;?></td>
                       <td><?php echo $data['username'];?></td>
                       <td><?php echo $data['nama']?></td>
-                      <td><?php if($data['hak_akses'] == 1 ){echo "Admin";}elseif($data['hak_akses'] == 2){echo "Pemilik";}elseif($data['hak_akses'] == 3){echo "Peminjam";}?></td>
+                      <td><?php echo $data['no_telp']?></td>
+                      <td><?php if($data['hak_akses'] == 1 ){echo "Admin";}elseif($data['hak_akses'] == 2){echo "Operator";}elseif($data['hak_akses'] == 3){echo "Sopir";}?></td>
                       <td style="width:100px">
                         <?php if($hak_akses==1 || $hak_akses==2){ ?>
                         <a href="/tb_pbd_sp/view/management/user/edit.php?nik=<?php echo $data['nik']; ?>" class="btn btn-primary btn-mini waves-effect waves-light">Edit</a>

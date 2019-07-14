@@ -36,7 +36,13 @@
         $status = 1;
         $_SESSION['username'] = $data['username'];
         $_SESSION['nama'] = $data['nama'];
+        $_SESSION['nik'] = $data['nik'];
+        $_SESSION['kota_lahir'] = $data['kota_lahir'];
+        $_SESSION['tanggal_lahir'] = $data['tanggal_lahir'];
+        $_SESSION['alamat'] = $data['alamat'];
+        $_SESSION['no_telp'] = $data['no_telp'];
         $_SESSION['hak_akses'] = $data['hak_akses'];
+        $_SESSION['kode_satker'] = $data['kode_satker'];
         $_SESSION['kode'] = '0';
       }
 

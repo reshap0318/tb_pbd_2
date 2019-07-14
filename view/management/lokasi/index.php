@@ -6,7 +6,7 @@ $lokasi = new lokasi($conn);
 
 <?php
   if(isset($hak_akses)){
-    if($hak_akses==3){
+    if($hak_akses!=1){
       array_push($_SESSION['pesan'],['eror','Anda Tidak Memiliki Akses Kesini']);
       header("location:/tb_pbd_sp/view/");
     }
@@ -50,7 +50,7 @@ Lokasi Management
                       <td><?php echo $data['asal']?></td>
                       <td><?php echo $data['tujuan']?></td>
                       <td><?php echo $data['jarak']?></td>
-                      <td><?php echo $data['harga']?></td>
+                      <td><?php echo $helper->rp($data['harga'])?></td>
                       <td style="width:100px">
                         <?php if($hak_akses==1 || $hak_akses==2){ ?>
                         <a href="/tb_pbd_sp/view/management/lokasi/edit.php?kode_lokasi=<?php echo $data['kode_lokasi']; ?>" class="btn btn-primary btn-mini waves-effect waves-light">Edit</a>

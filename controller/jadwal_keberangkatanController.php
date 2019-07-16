@@ -22,11 +22,11 @@
   }
 
   if($aksi=='create'){
-    $jadwal_keberangkatan->store($_POST['kode_pemesanan'],$_POST['tanggal'],$_POST['kode_kendaraan'], $_POST['kode_lokasi'],$_POST['kode_waktu'],$_POST['kode_satker']);
+    $jadwal_keberangkatan->store($_POST['kode_pemesanan'],$_POST['tanggal'],$_POST['kode_kendaraan'],$_POST['nik'],$_POST['kode_lokasi'],$_POST['kode_waktu'],$_POST['kode_satker']);
   }
 
   elseif($aksi=='update'){
-    $jadwal_keberangkatan->update($_POST['last_kode_pemesanan'],$_POST['kode_pemesanan'],$_POST['tanggal'],$_POST['kode_kendaraan'], $_POST['kode_lokasi'],$_POST['kode_waktu'],$_POST['kode_satker']);
+    $jadwal_keberangkatan->update($_POST['last_kode_pemesanan'],$_POST['kode_pemesanan'],$_POST['tanggal'],$_POST['kode_kendaraan'],$_POST['nik'], $_POST['kode_lokasi'],$_POST['kode_waktu'],$_POST['kode_satker']);
   }
 
   elseif($aksi=='delete'){

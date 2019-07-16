@@ -48,4 +48,25 @@
     </div>
 </div>
 
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label">Sopir</label>
+    <div class="col-sm-10">
+      <select class="form-control js-example-basic-single" name="nik" required>
+        <?php
+          include $_SERVER['DOCUMENT_ROOT'].'/tb_pbd_sp/model/user.php';
+          $user = new user($conn);
+
+          foreach ($user->data('',3) as $sat) {
+              if($sat['nik'] == $data['nik']){
+                echo '<option value="'.$sat['nik'].'" selected>'.$sat['nama'].'</option>';
+              }else{
+                echo '<option value="'.$sat['nik'].'">'.$sat['nama'].'</option>';
+              }
+          }
+        ?>
+      </select>
+      <span class="messages popover-valid"></span>
+    </div>
+</div>
+
 <input type="hidden" name="kode_satker" value="<?php echo $kode_satker; ?>">

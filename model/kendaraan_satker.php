@@ -8,19 +8,31 @@
       $this->koneksi = $conn;
   	}
 
-    function data($kode_parkir='', $kode_satker='',$relation = false){
-      $sql = "select * from kendaraan_satker";
+    function data($kode_parkir='', $kode_satker='', $plat_no='', $datang='', $keluar='', $relation = false){
+      $sql = "select * from kendaraan_satker where id <> '0'";
 
       if($relation){
-        $sql = "select id, kendaraan.plat_no, satker.nama as satker, datang, keluar from kendaraan_satker join kendaraan on kendaraan_satker.kode_kendaraan = kendaraan.kode_kendaraan join satker on kendaraan_satker.kode_satker = satker.kode_satker";
-      }
-
-      if($kode_satker!=''){
-        $sql .= " where satker.kode_satker = '$kode_satker'";
+        $sql = "select id, kendaraan.plat_no, satker.nama as satker, datang, keluar from kendaraan_satker join kendaraan on kendaraan_satker.kode_kendaraan = kendaraan.kode_kendaraan join satker on kendaraan_satker.kode_satker = satker.kode_satker where id <> '0'";
       }
 
       if($kode_parkir!=''){
-        $sql .= " where id = '$kode_parkir'";
+        $sql .= " and id = '$kode_parkir'";
+      }
+
+      if($kode_satker!=''){
+        $sql .= " and kendaraan_satker.kode_satker = '$kode_satker'";
+      }
+
+      if($plat_no!=''){
+        $sql .= " and kendaraan.plat_no = '$plat_no'";
+      }
+
+      if($datang!=''){
+        $sql .= " and DATE_FORMAT(datang, '%Y-%m-%d') = '$datang'";
+      }
+
+      if($keluar!=''){
+        $sql .= " and DATE_FORMAT(keluar, '%Y-%m-%d') = '$keluar'";
       }
 
       $data = mysqli_query($this->koneksi,$sql);

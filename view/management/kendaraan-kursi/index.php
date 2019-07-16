@@ -63,11 +63,11 @@ Kursi Management - <?php echo $kendaraan['plat_no']; ?>
               <td>: <?php echo $kendaraan['merek']; ?></td>
             </tr>
             <tr>
-              <td style="width:200px">Sopir</td>
-              <td>: <?php echo $kendaraan['sopir']; ?></td>
-              <td style="width:200px"></td>
               <td style="width:200px">Bensin</td>
               <td>: <?php echo $kendaraan['bensin']; ?></td>
+              <td style="width:200px"></td>
+              <td style="width:200px"></td>
+              <td></td>
             </tr>
           </table>
       </div>

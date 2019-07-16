@@ -23,6 +23,9 @@ Lokasi Kendaraan
 <?php endblock() ?>
 
 <?php startblock('content') ?>
+
+<?php include $_SERVER['DOCUMENT_ROOT'].'/tb_pbd_sp/view/lokasi-kendaraan/_filter.php'; ?>
+
 <div class="card">
   <div class="card-block">
       <div class="dt-responsive table-responsive">
@@ -30,6 +33,7 @@ Lokasi Kendaraan
               <thead>
                   <tr>
                       <th style="width:20px" class="text-center">NO</th>
+                      <th>Kode</th>
                       <th>Plat No</th>
                       <th>Satker</th>
                       <th>Datang</th>
@@ -39,10 +43,16 @@ Lokasi Kendaraan
               </thead>
               <tbody>
                 <?php $no=0;
-                  foreach ($parkir->data('',$kode_satker,true) as $data) {
+                  if($hak_akses==1){
+                    $datas = $parkir->data('',$satkers,$plat_no,$datang,$keluar,true);
+                  }else{
+                    $datas = $parkir->data('',$kode_satker,$plat_no,$datang,$keluar,true);
+                  }
+                  foreach ($datas as $data) {
                 ?>
                   <tr>
                       <td style="width:20px" class="text-center"><?php echo ++$no;?></td>
+                      <td><?php echo $data['id'];?></td>
                       <td><?php echo $data['plat_no'];?></td>
                       <td><?php echo $data['satker'];?></td>
                       <td><?php echo $data['datang'];?></td>

@@ -42,7 +42,11 @@ Edit Detail Keberangkatan
                       $kursi = new kendaraan_kursi($conn);
 
                       foreach ($kursi->kursit_pesan($kode_pemesanan, $kode_kursi) as $sat) {
+                        if($sat['kode_kursi'] == $data['kode_kursi']){
+                          echo '<option value="'.$sat['kode_kursi'].'" selected>'.$sat['nama'].'</option>';
+                        }else{
                           echo '<option value="'.$sat['kode_kursi'].'">'.$sat['nama'].'</option>';
+                        }
                       }
                     ?>
                   </select>

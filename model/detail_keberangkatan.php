@@ -138,6 +138,13 @@
         echo "Gagal Membersihkan data<br>".mysqli_error($this->koneksi)."<br>";
       }
     }
+
+    function uang_masuk($kode_pemesanan)
+    {
+        $sql = "SELECT pemesanan.kode_pemesanan, lokasi.harga,COUNT(pemesanan_detail.kode_pemesanan) as normal, sum(pemesanan_detail.biaya_tambahan) as tambahan from pemesanan_detail RIGHT join pemesanan on pemesanan_detail.kode_pemesanan = pemesanan.kode_pemesanan JOIN lokasi on pemesanan.kode_lokasi = lokasi.kode_lokasi  where pemesanan_detail.kode_pemesanan = '$kode_pemesanan' GROUP BY pemesanan.kode_pemesanan";
+        $data = mysqli_query($this->koneksi,$sql);
+        return $data;
+    }
   }
 
 ?>

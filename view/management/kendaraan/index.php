@@ -33,7 +33,6 @@ Kendaraan Management
                       <th>Plat No</th>
                       <th>Kondisi</th>
                       <th>Merek</th>
-                      <th>Sopir</th>
                       <th style="width:100px">Action</th>
                   </tr>
               </thead>
@@ -46,13 +45,12 @@ Kendaraan Management
                       <td><?php echo $data['plat_no'];?></td>
                       <td><?php echo $helper->kondisi($data['kondisi']);?></td>
                       <td><?php echo $data['merek'];?></td>
-                      <td><?php echo $data['sopir'];?></td>
                       <td style="width:100px">
                         <?php if($hak_akses==1 || $hak_akses==2){ ?>
                         <a href="/tb_pbd_sp/view/management/kendaraan/edit.php?kode_kendaraan=<?php echo $data['kode_kendaraan']; ?>" class="btn btn-primary btn-mini waves-effect waves-light">Edit</a>
                         <?php } ?>
                         <?php if($hak_akses==1 || $hak_akses==2){ ?>
-                        <a href="/tb_pbd_sp/view/management/kendaraan-kursi?kode_kendaraan=<?php echo $data['kode_kendaraan']; ?>" class="btn btn-primary btn-mini waves-effect waves-light">Kursi</a>
+                        <a href="/tb_pbd_sp/view/management/kendaraan-kursi?kode_kendaraan=<?php echo $data['kode_kendaraan']; ?>" class="btn btn-primary btn-mini waves-effect waves-light">Detail</a>
                         <?php } ?>
                         <?php if($hak_akses==1 || $hak_akses==2){ ?>
                         <a href="#" class="btn btn-danger btn-mini waves-effect waves-light" onclick="hapus('<?php echo $data['kode_kendaraan']; ?>')">Delete</a>

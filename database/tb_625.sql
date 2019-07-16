@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 14, 2019 at 09:08 AM
+-- Generation Time: Jul 16, 2019 at 06:58 AM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 7.2.5
 
@@ -39,7 +39,8 @@ CREATE TABLE `bensin` (
 --
 
 INSERT INTO `bensin` (`kode_bensin`, `nama`, `harga`) VALUES
-('1', 'Petamax', 9800);
+('1', 'Petamax', 9800),
+('2', 'hohoH', 12000);
 
 -- --------------------------------------------------------
 
@@ -56,16 +57,16 @@ CREATE TABLE `kendaraan` (
   `m_1l` decimal(7,2) NOT NULL,
   `kondisi` int(1) NOT NULL,
   `kode_merek` varchar(1) NOT NULL,
-  `kode_bensin` varchar(1) NOT NULL,
-  `nik` char(16) NOT NULL
+  `kode_bensin` varchar(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `kendaraan`
 --
 
-INSERT INTO `kendaraan` (`kode_kendaraan`, `plat_no`, `no_mesin`, `no_rangka`, `minyak_full`, `m_1l`, `kondisi`, `kode_merek`, `kode_bensin`, `nik`) VALUES
-('1', 'BA 4925 EZ', 'ASK39012oLKS', '314LASK1020L', '29.20', '21.01', 2, 'A', '1', '1611522012');
+INSERT INTO `kendaraan` (`kode_kendaraan`, `plat_no`, `no_mesin`, `no_rangka`, `minyak_full`, `m_1l`, `kondisi`, `kode_merek`, `kode_bensin`) VALUES
+('1', 'BA 4925 EZ', 'ASK39012oLKS', '314LASK1020L', '29.20', '21.01', 2, 'A', '1'),
+('2', 'BA 7120 EK', 'HASK012KSAL021', 'JKAO99120031L', '12.00', '12.90', 1, 'A', '1');
 
 -- --------------------------------------------------------
 
@@ -85,8 +86,7 @@ CREATE TABLE `kendaraan_kursi` (
 
 INSERT INTO `kendaraan_kursi` (`kode_kursi`, `nama`, `kode_kendaraan`) VALUES
 ('1', 'PYK1', '1'),
-('2', 'KSP1', '1'),
-('3', 'PSK1', '1');
+('2', 'KSP1', '1');
 
 -- --------------------------------------------------------
 
@@ -108,7 +108,8 @@ CREATE TABLE `kendaraan_satker` (
 
 INSERT INTO `kendaraan_satker` (`id`, `kode_kendaraan`, `kode_satker`, `datang`, `keluar`) VALUES
 ('AA1', '1', 'L1', '2019-07-12 17:22:32', '2019-07-13 07:02:52'),
-('AA2', '1', 'L1', '2019-07-14 18:00:00', NULL);
+('AA2', '1', 'L1', '2019-07-14 18:00:00', NULL),
+('AA3', '2', 'L1', '2019-07-14 18:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -160,6 +161,7 @@ CREATE TABLE `pemesanan` (
   `kode_pemesanan` char(3) NOT NULL,
   `tanggal` date DEFAULT NULL,
   `kode_kendaraan` varchar(2) NOT NULL,
+  `nik` char(16) NOT NULL,
   `kode_lokasi` varchar(1) NOT NULL,
   `kode_waktu` varchar(1) NOT NULL,
   `kode_satker` char(2) NOT NULL
@@ -169,8 +171,9 @@ CREATE TABLE `pemesanan` (
 -- Dumping data for table `pemesanan`
 --
 
-INSERT INTO `pemesanan` (`kode_pemesanan`, `tanggal`, `kode_kendaraan`, `kode_lokasi`, `kode_waktu`, `kode_satker`) VALUES
-('1', '2019-07-14', '1', '1', '1', 'L1');
+INSERT INTO `pemesanan` (`kode_pemesanan`, `tanggal`, `kode_kendaraan`, `nik`, `kode_lokasi`, `kode_waktu`, `kode_satker`) VALUES
+('1', '2019-07-14', '1', '1611523012', '1', '1', 'L1'),
+('3', '2019-07-15', '2', '1611523012', '1', '1', 'L1');
 
 -- --------------------------------------------------------
 
@@ -185,7 +188,7 @@ CREATE TABLE `pemesanan_detail` (
   `no_telp` char(13) NOT NULL,
   `jemput` varchar(50) NOT NULL,
   `antar` varchar(50) NOT NULL,
-  `biaya_tambahan` int(5) DEFAULT '0'
+  `biaya_tambahan` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -193,7 +196,7 @@ CREATE TABLE `pemesanan_detail` (
 --
 
 INSERT INTO `pemesanan_detail` (`kode_pemesanan`, `kode_kursi`, `nama`, `no_telp`, `jemput`, `antar`, `biaya_tambahan`) VALUES
-('1', '1', 'REINALDO SHANDEV PRATAMA', '082284009400', 'op', 'upss', 0);
+('1', '1', 'REINALDO SHANDEV PRATAMA', '082284009498', 'ops', 'upss', 120);
 
 -- --------------------------------------------------------
 
@@ -238,8 +241,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`nik`, `nama`, `username`, `password`, `kota_lahir`, `tanggal_lahir`, `alamat`, `no_telp`, `hak_akses`, `kode_satker`) VALUES
-('1611521006', 'Annisa Aulia Khaira', '1611521006', 'd23dcdf8e94cf86e2d8eb56877189d55', '', '0000-00-00', '', '', '2', 'L1'),
-('1611522012', 'Reinaldo Shandev Pratama', '1611522012', '7deab5e2bbd609ec8f8e37f50483f612', '', '0000-00-00', '', '', '1', 'L2');
+('1611521006', 'Annisa Aulia Khaira', '1611521006', 'd23dcdf8e94cf86e2d8eb56877189d55', '', '0000-00-00', '', '082267846262', '2', 'L1'),
+('1611522012', 'Reinaldo Shandev Pratama', '1611522012', '7deab5e2bbd609ec8f8e37f50483f612', '', '0000-00-00', '', '', '1', 'L1'),
+('1611523012', 'Miftahul Asraf', '1611523012', 'f592f02b45526f480ae133cf2e9d0a14', 'Padang', '1998-06-03', 'Padang', '082284009400', '3', 'L2');
 
 -- --------------------------------------------------------
 
@@ -279,7 +283,6 @@ ALTER TABLE `kendaraan`
   ADD UNIQUE KEY `plat_no` (`plat_no`),
   ADD UNIQUE KEY `no_mesin` (`no_mesin`),
   ADD UNIQUE KEY `no_rangka` (`no_rangka`),
-  ADD KEY `users_mobil_fk` (`nik`),
   ADD KEY `merek_kendaraan_mobil_fk` (`kode_merek`),
   ADD KEY `bensin_mobil_fk` (`kode_bensin`);
 
@@ -318,7 +321,8 @@ ALTER TABLE `pemesanan`
   ADD KEY `lokasi_pemesanan_fk` (`kode_lokasi`),
   ADD KEY `kendaraan_pemesanan_fk` (`kode_kendaraan`),
   ADD KEY `waktu_fk` (`kode_waktu`),
-  ADD KEY `ssatker_pk` (`kode_satker`);
+  ADD KEY `ssatker_pk` (`kode_satker`),
+  ADD KEY `sopir_fk` (`nik`);
 
 --
 -- Indexes for table `pemesanan_detail`
@@ -356,8 +360,7 @@ ALTER TABLE `waktu`
 --
 ALTER TABLE `kendaraan`
   ADD CONSTRAINT `bensin_mobil_fk` FOREIGN KEY (`kode_bensin`) REFERENCES `bensin` (`kode_bensin`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `merek_kendaraan_mobil_fk` FOREIGN KEY (`kode_merek`) REFERENCES `merek_kendaraan` (`kode_merek`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `users_mobil_fk` FOREIGN KEY (`nik`) REFERENCES `users` (`nik`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `merek_kendaraan_mobil_fk` FOREIGN KEY (`kode_merek`) REFERENCES `merek_kendaraan` (`kode_merek`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `kendaraan_kursi`
@@ -379,6 +382,7 @@ ALTER TABLE `pemesanan`
   ADD CONSTRAINT `kendaraan_pemesanan_fk` FOREIGN KEY (`kode_kendaraan`) REFERENCES `kendaraan` (`kode_kendaraan`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `lokasi_pemesanan_fk` FOREIGN KEY (`kode_lokasi`) REFERENCES `lokasi` (`kode_lokasi`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `pemesanan_ibfk_1` FOREIGN KEY (`kode_satker`) REFERENCES `satker` (`kode_satker`),
+  ADD CONSTRAINT `pemesanan_ibfk_2` FOREIGN KEY (`nik`) REFERENCES `users` (`nik`),
   ADD CONSTRAINT `waktu_fk` FOREIGN KEY (`kode_waktu`) REFERENCES `waktu` (`kode_waktu`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --

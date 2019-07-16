@@ -8,7 +8,7 @@
       $this->koneksi = $conn;
   	}
 
-    function data($nik='', $relation = false){
+    function data($nik='', $hak_akses='', $relation = false){
 
       $sql = "select * from users";
 
@@ -19,7 +19,11 @@
       if($nik!=''){
         $sql .= " where nik = '$nik'";
       }
-      
+
+      if($hak_akses!=''){
+        $sql .= " where hak_akses = $hak_akses";
+      }
+
       $data = mysqli_query($this->koneksi,$sql);
 
       return $data;

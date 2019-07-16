@@ -3,7 +3,7 @@ include $_SERVER['DOCUMENT_ROOT'].'/tb_pbd_sp/blank.php';
 include $_SERVER['DOCUMENT_ROOT'].'/tb_pbd_sp/model/detail_keberangkatan.php';
 include $_SERVER['DOCUMENT_ROOT'].'/tb_pbd_sp/model/jadwal_keberangkatan.php';
 $detail_keberangkatan = new detail_keberangkatan($conn);
-$keberangkatan = new jadwal_keberangkatan($conn);
+$berangkat = new jadwal_keberangkatan($conn);
 ?>
 
 <?php
@@ -14,7 +14,15 @@ $keberangkatan = new jadwal_keberangkatan($conn);
     }
   }
   $kode_pemesanan = $_GET['kode_pemesanan'];
-  $keberangkatan = mysqli_fetch_assoc($keberangkatan->data($kode_pemesanan,'','','','',$kode_satker, true));
+  if($hak_akses==1){
+    $keberangkatan = mysqli_fetch_assoc($berangkat->data($kode_pemesanan,'','','','','', true));
+  }elseif($hak_akses==2){
+    $keberangkatan = mysqli_fetch_assoc($berangkat->data($kode_pemesanan,'','','','',$kode_satker, true));
+  }elseif($hak_akses==3){
+    $keberangkatan = mysqli_fetch_assoc($berangkat->data($kode_pemesanan,'','','','','', true,$nik));
+  }
+
+  $uang = mysqli_fetch_assoc($detail_keberangkatan->uang_masuk($kode_pemesanan));
 ?>
 <?php startblock('title') ?> Detail keberangkatan <?php echo $keberangkatan['plat_no']; ?> <?php endblock() ?>
 
@@ -51,6 +59,35 @@ Detail keberangkatan <?php echo $keberangkatan['plat_no']; ?>
               <td style="width:200px"></td>
               <td style="width:200px">Satuan Kerja</td>
               <td>: <?php echo $keberangkatan['satker']; ?></td>
+            </tr>
+            <tr>
+              <td style="width:200px">Sopir</td>
+              <td>: <?php echo $keberangkatan['sopir'];?></td>
+              <td style="width:200px"></td>
+              <td style="width:200px"></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td colspan="5" class="text-center">
+                Keuangan Masuk
+              </td>
+            </tr>
+            <tr>
+              <td style="width:200px">Normal</td>
+              <td>: <?php echo $helper->rp($uang['normal']*$uang['harga']); ?></td>
+              <td style="width:200px"></td>
+              <td style="width:200px">Tambahan</td>
+              <td>: <?php echo $helper->rp($uang['tambahan']); ?></td>
+            </tr>
+            <tr>
+              <td colspan="5" class="text-center">
+                Total
+              </td>
+            </tr>
+            <tr>
+              <td colspan="5" class="text-center">
+                <label class="label label-lg label-info"><?php echo $helper->rp($uang['normal']*$uang['harga']+$uang['tambahan']); ?></label>
+              </td>
             </tr>
           </table>
       </div>

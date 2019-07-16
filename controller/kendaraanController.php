@@ -21,11 +21,11 @@
     $aksi = $_GET['aksi'];
   }
   if($aksi=='create'){
-    $kendaraan->store($_POST['kode_kendaraan'], $_POST['plat_no'], $_POST['no_mesin'], $_POST['no_rangka'], $_POST['minyak_full'],$_POST['m_1l'],$_POST['kondisi'],$_POST['kode_merek'],$_POST['kode_bensin'],$_POST['nik']);
+    $kendaraan->store($_POST['kode_kendaraan'], $_POST['plat_no'], $_POST['no_mesin'], $_POST['no_rangka'], $_POST['minyak_full'],$_POST['m_1l'],$_POST['kondisi'],$_POST['kode_merek'],$_POST['kode_bensin']);
   }
 
   elseif($aksi=='update'){
-    $kendaraan->update($_POST['last_kode_kendaraan'],$_POST['kode_kendaraan'], $_POST['plat_no'], $_POST['no_mesin'], $_POST['no_rangka'], $_POST['minyak_full'],$_POST['m_1l'],$_POST['kondisi'],$_POST['kode_merek'],$_POST['kode_bensin'],$_POST['nik']);
+    $kendaraan->update($_POST['last_kode_kendaraan'],$_POST['kode_kendaraan'], $_POST['plat_no'], $_POST['no_mesin'], $_POST['no_rangka'], $_POST['minyak_full'],$_POST['m_1l'],$_POST['kondisi'],$_POST['kode_merek'],$_POST['kode_bensin']);
   }
 
   elseif($aksi=='delete'){

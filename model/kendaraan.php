@@ -12,7 +12,7 @@
       $sql = "select * from kendaraan";
 
       if($relation){
-        $sql = "select kode_kendaraan, plat_no, no_mesin, no_rangka, minyak_full, m_1l, kondisi, merek_kendaraan.nama as merek, bensin.nama as bensin, users.nama as sopir from kendaraan join merek_kendaraan on kendaraan.kode_merek = merek_kendaraan.kode_merek join bensin on kendaraan.kode_bensin = bensin.kode_bensin join users on kendaraan.nik = users.nik";
+        $sql = "select kode_kendaraan, plat_no, no_mesin, no_rangka, minyak_full, m_1l, kondisi, merek_kendaraan.nama as merek, bensin.nama as bensin from kendaraan join merek_kendaraan on kendaraan.kode_merek = merek_kendaraan.kode_merek join bensin on kendaraan.kode_bensin = bensin.kode_bensin";
       }
 
       if($kode_kendaraan!=''){
@@ -22,8 +22,8 @@
       return $data;
     }
 
-    function store($kode_kendaraan = null, $plat_no = null, $no_mesin = null, $no_rangka = null, $minyak_full = null, $m_1l = null, $kondisi = null, $kode_merek = null, $kode_bensin = null, $nik = null, $pesan = true){
-        $sql = "insert INTO kendaraan(kode_kendaraan, plat_no, no_mesin, no_rangka, minyak_full, m_1l, kondisi, kode_merek, kode_bensin, nik) values ('$kode_kendaraan', '$plat_no', '$no_mesin', '$no_rangka', $minyak_full, $m_1l, $kondisi, '$kode_merek', '$kode_bensin', '$nik')";
+    function store($kode_kendaraan = null, $plat_no = null, $no_mesin = null, $no_rangka = null, $minyak_full = null, $m_1l = null, $kondisi = null, $kode_merek = null, $kode_bensin = null, $pesan = true){
+        $sql = "insert INTO kendaraan(kode_kendaraan, plat_no, no_mesin, no_rangka, minyak_full, m_1l, kondisi, kode_merek, kode_bensin) values ('$kode_kendaraan', '$plat_no', '$no_mesin', '$no_rangka', $minyak_full, $m_1l, $kondisi, '$kode_merek', '$kode_bensin')";
 
         if($pesan){
           if(!mysqli_query($this->koneksi,$sql)){
@@ -42,7 +42,7 @@
         }
     }
 
-    function update($last_kode_kendaraan, $kode_kendaraan, $plat_no = null, $no_mesin = null, $no_rangka = null, $minyak_full = null, $m_1l = null, $kondisi = null, $kode_merek = null, $kode_bensin = null, $nik = null){
+    function update($last_kode_kendaraan, $kode_kendaraan, $plat_no = null, $no_mesin = null, $no_rangka = null, $minyak_full = null, $m_1l = null, $kondisi = null, $kode_merek = null, $kode_bensin = null){
 
         $data = mysqli_fetch_assoc($this->data($last_kode_kendaraan));
 
@@ -78,10 +78,6 @@
 
         if($kode_bensin != null){
             $sql .= ",kode_bensin='$kode_bensin' ";
-        }
-
-        if($nik != null){
-            $sql .= ",nik='$nik' ";
         }
 
         $kode_kendaraan = $data['kode_kendaraan'];

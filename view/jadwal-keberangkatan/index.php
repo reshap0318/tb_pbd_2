@@ -1,7 +1,9 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'].'/tb_pbd_sp/blank.php';
 include $_SERVER['DOCUMENT_ROOT'].'/tb_pbd_sp/model/jadwal_keberangkatan.php';
+include $_SERVER['DOCUMENT_ROOT'].'/tb_pbd_sp/model/kendaraan.php';
 $jadwal_keberangkatan = new jadwal_keberangkatan($conn);
+$kendaraan = new kendaraan($conn);
 ?>
 
 <?php
@@ -22,7 +24,10 @@ $jadwal_keberangkatan = new jadwal_keberangkatan($conn);
 Jadwal keberangkatan
 <?php endblock() ?>
 
-<?php startblock('content') ?>
+<?php startblock('content')?>
+
+<?php include $_SERVER['DOCUMENT_ROOT'].'/tb_pbd_sp/view/jadwal-keberangkatan/_filter.php'; ?>
+
 <div class="card">
   <div class="card-block">
       <div class="dt-responsive table-responsive">
@@ -41,7 +46,15 @@ Jadwal keberangkatan
               </thead>
               <tbody>
                 <?php $no=0;
-                  foreach ($jadwal_keberangkatan->data('','','','','',$kode_satker,true) as $data) {
+
+                  if($hak_akses==1){
+                    $datas = $jadwal_keberangkatan->data($kode_pemesanan,$tanggal,'',$kode_lokasi,$kode_waktu,'',true,'',$plat_no);
+                  }elseif($hak_akses==2){
+                    $datas = $jadwal_keberangkatan->data($kode_pemesanan,$tanggal,'',$kode_lokasi,$kode_waktu,$kode_satker,true,'',$plat_no);
+                  }elseif($hak_akses==3){
+                    $datas = $jadwal_keberangkatan->data($kode_pemesanan,$tanggal,'',$kode_lokasi,$kode_waktu,'',true,$nik,$plat_no);
+                  }
+                  foreach ($datas as $data) {
                 ?>
                   <tr>
                       <td style="width:20px" class="text-center"><?php echo ++$no;?></td>

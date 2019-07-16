@@ -198,37 +198,37 @@
                             </li>
                             <li class="">
                                 <a href="/tb_pbd_sp/view/management/satuan-kerja">
-                                    <span class="pcoded-micon"><i class="icofont icofont-users"></i></span>
+                                    <span class="pcoded-micon"><i class="icofont icofont-building"></i></span>
                                     <span class="pcoded-mtext">Satuan Kerja</span>
                                 </a>
                             </li>
                             <li class="">
                                 <a href="/tb_pbd_sp/view/management/bensin">
-                                    <span class="pcoded-micon"><i class="icofont icofont-users"></i></span>
+                                    <span class="pcoded-micon"><i class="icofont icofont-energy-oil"></i></span>
                                     <span class="pcoded-mtext">Bensin</span>
                                 </a>
                             </li>
                             <li class="">
                                 <a href="/tb_pbd_sp/view/management/lokasi">
-                                    <span class="pcoded-micon"><i class="icofont icofont-users"></i></span>
+                                    <span class="pcoded-micon"><i class="icofont icofont-social-google-map"></i></span>
                                     <span class="pcoded-mtext">Lokasi</span>
                                 </a>
                             </li>
                             <li class="">
                                 <a href="/tb_pbd_sp/view/management/waktu">
-                                    <span class="pcoded-micon"><i class="icofont icofont-users"></i></span>
+                                    <span class="pcoded-micon"><i class="icofont icofont-ui-timer"></i></span>
                                     <span class="pcoded-mtext">Waktu</span>
                                 </a>
                             </li>
                             <li class="">
                                 <a href="/tb_pbd_sp/view/management/merek-kendaraan">
-                                    <span class="pcoded-micon"><i class="icofont icofont-users"></i></span>
+                                    <span class="pcoded-micon"><i class="icofont icofont-label"></i></span>
                                     <span class="pcoded-mtext">Merek Kendaraan</span>
                                 </a>
                             </li>
                             <li class="">
                                 <a href="/tb_pbd_sp/view/management/kendaraan">
-                                    <span class="pcoded-micon"><i class="icofont icofont-users"></i></span>
+                                    <span class="pcoded-micon"><i class="icofont icofont-vehicle-delivery-van"></i></span>
                                     <span class="pcoded-mtext">Kendaraan</span>
                                 </a>
                             </li>
@@ -238,14 +238,14 @@
                         <ul class="pcoded-item pcoded-left-item">
                           <li class="">
                               <a href="/tb_pbd_sp/view/jadwal-Keberangkatan">
-                                  <span class="pcoded-micon"><i class="icofont icofont-users"></i></span>
+                                  <span class="pcoded-micon"><i class="icofont icofont-delivery-time"></i></span>
                                   <span class="pcoded-mtext">Jadwal Keberangkatan</span>
                               </a>
                           </li>
                         <?php if($hak_akses == 1 || $hak_akses == 2){ ?>
                           <li class="">
                               <a href="/tb_pbd_sp/view/lokasi-kendaraan">
-                                  <span class="pcoded-micon"><i class="icofont icofont-users"></i></span>
+                                  <span class="pcoded-micon"><i class="icofont icofont-map"></i></span>
                                   <span class="pcoded-mtext">Lokasi Kendaraan</span>
                               </a>
                           </li>
